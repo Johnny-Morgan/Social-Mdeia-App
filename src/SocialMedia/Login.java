@@ -1,4 +1,5 @@
 package SocialMedia;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -82,6 +83,7 @@ public class Login {
          System.out.println("3 - Email");
          System.out.println("4 - Home Location");
          System.out.println("5 - Date Of Birth");
+         System.out.println("6 - Hobby");
          System.out.println("0 - Return to Main Menu\n");
 
          System.out.print("Enter your choice: ");
@@ -136,6 +138,13 @@ public class Login {
                } while (!Methods.checkProperBirthday(Methods.convertDate(newData)));
                currentMember.setDateOfBirth(newData);
                break;
+            case '6':
+               System.out.println("\nYour hobby is: " +
+                       currentMember.getHobby());
+               System.out.print("\nEnter your new hobby: ");
+               newData = keyboard.nextLine();
+               currentMember.setHobby(newData);
+               break;
             case '0':
                break;
             default:
@@ -146,8 +155,7 @@ public class Login {
    }//editMenu
 
 
-   // OPTION 2 - Check for and add possible friends based on home location 
-   // and friends of friends
+   // OPTION 2 - Check for and add possible friends based on home location
    protected static void checkFriends(ArrayOfPersons myArray, int location) {
       Person currentMember = myArray.getCurrent(location), possibleFriend;
       ArrayList<Person> friendsOfFriends = new ArrayList<Person>();
@@ -172,6 +180,27 @@ public class Login {
          }//if
       }//for
 
+      //Check for and add possible friends based on hobby
+      System.out.println("\nSuggested friends based on hobby:");
+      for (int index = 0; index < myArray.getNoOfPersons(); index++) {
+         possibleFriend = myArray.checkFriendsByHobby(index, currentMember.getHobby());
+         if ((possibleFriend != null) && (index != location)) {
+            // If not already a friend ask if they are to be added
+            if (!currentMember.alreadyAFriend(possibleFriend)) {
+               myArray.displayName(index);
+               System.out.print("\tYou share an interest in " + currentMember.getHobby() + "\n");
+               System.out.print("\tDo you want to add this person as a friend (Y/N)? ");
+               response = keyboard.nextLine().toUpperCase().charAt(0);
+               if (response == 'Y') {
+                  myArray.addFriends(location, possibleFriend);
+                  System.out.println("\t" + myArray.getFullName(index) + " added as a Friend");
+                  noOfFriends++;
+               }//if
+            }//if
+         }//if
+      }//for
+
+      //Check for and add possible friends based on friends of friends
       System.out.println("\nSuggested friends based on Friends of Friends:");
       for (Person aFriend : currentMember.getFriends()) {
          for (Person friend : aFriend.getFriends()) {

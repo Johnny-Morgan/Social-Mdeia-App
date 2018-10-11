@@ -11,21 +11,21 @@ public class SocialNetwork {
    protected static ArrayOfPersons addMembers(ArrayOfPersons myArray) {
 
       Person person1 = new Person("j.smith@hotmail.com", "Smith", "John",
-         "Dublin", "30-10-1990");
-      Person person2 = new Person("d.jones@hotmail.com", "Jones", "Denise", 
-         "Dublin", "25-04-2000");
+         "Dublin", "Football", "30-10-1990");
+      Person person2 = new Person("d.jones@hotmail.com", "Jones", "Denise",
+         "Dublin", "Netball","25-04-2000");
       Person person3 = new Person("m.young@google.com", "Young", "Mary", "Blackrock",
-         "06-05-1997");
+         "Painting", "06-05-1997");
       Person person4 = new Person("c.robinson@btinternet.com", "Robinson", "Ciara", 
-         "Dundalk", "24-06-2005");
+         "Dundalk", "Piano", "24-06-2005");
       Person person5 = new Person("j.agnew@gmail.com", "Agnew", "James", "Blackrock",
-         "15-09-2000");
+         "Football", "15-09-2000");
       Person person6 = new Person("a.jones@ulster.ac.uk", "Jones", "Alex", 
-         "Blackrock", "01-07-1995");
+         "Blackrock", "Guitar", "01-07-1995");
       Person person7 = new Person("b.jones@gmail.com", "Jones", "Bobby", 
-         "Portstewart", "01-07-1995");
-      Person person8 = new Person("b.kelly@ulster.ac.uk", "Kelly", "Bronagh", 
-         "Dundalk", "01-07-1995");
+         "Portstewart", "Hiking", "01-07-1995");
+      Person person8 = new Person("b.kelly@ulster.ac.uk", "Kelly", "Bronagh",
+         "Dundalk", "Poker", "01-07-1995");
 
       // Add members
       // Maintaining order by email
@@ -53,7 +53,7 @@ public class SocialNetwork {
       final String ADMINLOGIN = "ADMIN";
       char choice;
       int index;
-      String memberLogin, firstName, lastName, email, home, dateOfBirth;
+      String memberLogin, firstName, lastName, email, home, hobby, dateOfBirth;
       Person newPerson;
 
       ArrayOfPersons mySocialMembers = new ArrayOfPersons();
@@ -99,6 +99,8 @@ public class SocialNetwork {
                lastName = keyboard.nextLine();
                System.out.print("Home location:              ");
                home = keyboard.nextLine();
+               System.out.print("Your hobby:                 ");
+               hobby = keyboard.nextLine();
                do {
                   do {
                      System.out.print("Date of Birth (DD-MM-YYYY): ");
@@ -109,7 +111,7 @@ public class SocialNetwork {
 
                // Create new member and insert into array in alphabetical 
                // order of email address
-               newPerson = new Person(email, lastName, firstName, home, dateOfBirth);
+               newPerson = new Person(email, lastName, firstName, home, hobby, dateOfBirth);
                mySocialMembers.insert(newPerson);
                break;
             case '0':

@@ -12,15 +12,17 @@ public class Person {
    private String lastName;
    private String firstName;
    private String home;
+   private String hobby;
    private LocalDate dateOfBirth;
 
    private ArrayList<Person> friends;
 
-   public Person(String myEmail, String last, String first, String newHome, String myDOB) {
+   public Person(String myEmail, String last, String first, String newHome, String myHobby, String myDOB) {
       email = myEmail;
       lastName = last;
       firstName = first;
       home = newHome;
+      hobby = myHobby;
       dateOfBirth = Methods.convertDate(myDOB);
       friends = new ArrayList<Person>();
    }//Person
@@ -56,6 +58,14 @@ public class Person {
    protected void setHome(String newHome) {
       home = newHome;
    }//setHome
+
+   public String getHobby() {
+      return hobby;
+   }
+
+   public void setHobby(String myHobby) {
+      hobby = myHobby;
+   }
 
    protected LocalDate getDateOfBirth() {
       return dateOfBirth;
@@ -120,6 +130,7 @@ public class Person {
       System.out.println("\nFull Name:     " + getFullName());
       System.out.println("Email:         " + email);
       System.out.println("Home:          " + home);
+      System.out.println("Hobby:         " + hobby);
       System.out.println("Date Of Birth: " + Methods.dateToString(dateOfBirth));
       displayFriends();
    }//displayPerson

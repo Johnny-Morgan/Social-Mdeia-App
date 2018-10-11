@@ -37,6 +37,10 @@ public class ArrayOfPersons {
       return members.get(position).getFullName();
    }//getFullName
 
+   protected String getHobby(int position) {
+      return members.get(position).getHobby();
+   }//getFullName
+
    // Insert Person object into the correct index in the array - sorted by email
    protected void insert(Person newPerson) {
       members.add(newPerson);
@@ -65,7 +69,7 @@ public class ArrayOfPersons {
    // Return index position of member or number < 0 if not found
    protected int findMemberByEmail(String email) {
       return Collections.binarySearch(members, new Person(email, null, null, 
-      null, "01-01-2000"), emailCompare);
+      null, null, "01-01-2000"), emailCompare);
    }//findMemberByEmail
 
    // Method to find Member(s) by their last name
@@ -92,6 +96,15 @@ public class ArrayOfPersons {
       }//if
       return answer;
    }//checkFriendByHome
+
+   // Check if member at memberIndex has the same hobby as myHobby
+   protected Person checkFriendsByHobby(int memberIndex, String myHobby) {
+      Person answer = null;
+      if (members.get(memberIndex).getHobby().equals(myHobby)) {
+         answer = members.get(memberIndex);
+      }//if
+      return answer;
+   }//checkFriendByHobby
 
    // Check if member at memberIndex has the same last name as searchName
    protected ArrayList<Person> checkFriendsByName(int memberIndex, String searchName) {
