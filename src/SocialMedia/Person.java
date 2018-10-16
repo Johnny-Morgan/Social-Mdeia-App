@@ -11,17 +11,19 @@ public class Person {
    private String email;
    private String lastName;
    private String firstName;
-   private String home;
+   private String homeTown;
+   private String county;
    private String hobby;
    private LocalDate dateOfBirth;
 
    private ArrayList<Person> friends;
 
-   public Person(String myEmail, String last, String first, String newHome, String myHobby, String myDOB) {
+   public Person(String myEmail, String last, String first, String newHomeTown, String newCounty, String myHobby, String myDOB) {
       email = myEmail;
       lastName = last;
       firstName = first;
-      home = newHome;
+      homeTown = newHomeTown;
+      county = newCounty;
       hobby = myHobby;
       dateOfBirth = Methods.convertDate(myDOB);
       friends = new ArrayList<Person>();
@@ -51,13 +53,21 @@ public class Person {
       return firstName + " " + lastName;
    }//getFullName
 
-   protected String getHome() {
-      return home;
+   protected String getHomeTown() {
+      return homeTown;
    }//getHome
 
-   protected void setHome(String newHome) {
-      home = newHome;
-   }//setHome
+   protected void setHomeTown(String newHomeTown) {
+      homeTown = newHomeTown;
+   }//setHomeTown
+
+   protected String getCounty() {
+      return county;
+   }//getCounty
+
+   protected void setCounty(String newCounty) {
+      county = newCounty;
+   }//setCounty
 
    public String getHobby() {
       return hobby;
@@ -129,7 +139,8 @@ public class Person {
    protected void displayPerson() {
       System.out.println("\nFull Name:     " + getFullName());
       System.out.println("Email:         " + email);
-      System.out.println("Home:          " + home);
+      System.out.println("Home town:     " + homeTown);
+      System.out.println("County:        " + county);
       System.out.println("Hobby:         " + hobby);
       System.out.println("Date Of Birth: " + Methods.dateToString(dateOfBirth));
       displayFriends();

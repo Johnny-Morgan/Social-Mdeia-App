@@ -69,7 +69,7 @@ public class ArrayOfPersons {
    // Return index position of member or number < 0 if not found
    protected int findMemberByEmail(String email) {
       return Collections.binarySearch(members, new Person(email, null, null, 
-      null, null, "01-01-2000"), emailCompare);
+      null, null, null,"01-01-2000"), emailCompare);
    }//findMemberByEmail
 
    // Method to find Member(s) by their last name
@@ -88,14 +88,23 @@ public class ArrayOfPersons {
    // FRIENDS METHODS
    // ***************
 
-   // Check if member at memberIndex has the same home as myHome
-   protected Person checkFriendsByHome(int memberIndex, String myHome) {
+   // Check if member at memberIndex has the same home as myHomeTown
+   protected Person checkFriendsByHomeTown(int memberIndex, String myHomeTown) {
       Person answer = null;
-      if (members.get(memberIndex).getHome().equals(myHome)) {
+      if (members.get(memberIndex).getHomeTown().equals(myHomeTown)) {
          answer = members.get(memberIndex);
       }//if
       return answer;
-   }//checkFriendByHome
+   }//checkFriendByHomeTown
+
+   // Check if member at memberIndex has the same county
+   protected Person checkFriendsByCounty(int memberIndex, String myCounty) {
+      Person answer = null;
+      if (members.get(memberIndex).getCounty().equals(myCounty)) {
+         answer = members.get(memberIndex);
+      }//if
+      return answer;
+   }//checkFriendByHomeCity
 
    // Check if member at memberIndex has the same hobby as myHobby
    protected Person checkFriendsByHobby(int memberIndex, String myHobby) {

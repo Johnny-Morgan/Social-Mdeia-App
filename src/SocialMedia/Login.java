@@ -81,9 +81,10 @@ public class Login {
          System.out.println("1 - First Name");
          System.out.println("2 - Last Name");
          System.out.println("3 - Email");
-         System.out.println("4 - Home Location");
-         System.out.println("5 - Date Of Birth");
-         System.out.println("6 - Hobby");
+         System.out.println("4 - Home Town Location");
+         System.out.println("5 - County");
+         System.out.println("6 - Date Of Birth");
+         System.out.println("7 - Hobby");
          System.out.println("0 - Return to Main Menu\n");
 
          System.out.print("Enter your choice: ");
@@ -121,13 +122,20 @@ public class Login {
                }//else
                break;
             case '4':
-               System.out.println("\nYour home location is: " + 
-                  currentMember.getHome());
-               System.out.print("\nEnter your new home location: ");
+               System.out.println("\nYour home town location is: " +
+                  currentMember.getHomeTown());
+               System.out.print("\nEnter your new home town: ");
                newData = keyboard.nextLine();
-               currentMember.setHome(newData);
+               currentMember.setHomeTown(newData);
                break;
             case '5':
+               System.out.println("\nYour county location is: " +
+                       currentMember.getCounty());
+               System.out.print("\nEnter your new home county: ");
+               newData = keyboard.nextLine();
+               currentMember.setCounty(newData);
+               break;
+            case '6':
                System.out.println("\nYour Date of Birth is: " + 
                   Methods.dateToString(currentMember.getDateOfBirth()));
                do {
@@ -138,7 +146,7 @@ public class Login {
                } while (!Methods.checkProperBirthday(Methods.convertDate(newData)));
                currentMember.setDateOfBirth(newData);
                break;
-            case '6':
+            case '7':
                System.out.println("\nYour hobby is: " +
                        currentMember.getHobby());
                System.out.print("\nEnter your new hobby: ");
@@ -162,9 +170,10 @@ public class Login {
       char response;
       int noOfFriends = 0;
 
-      System.out.println("\nSuggested friends based on home location:");
+      //Check for and add possible friends based on home town
+      System.out.println("\nSuggested friends based on home town location:");
       for (int index = 0; index < myArray.getNoOfPersons(); index++) {
-         possibleFriend = myArray.checkFriendsByHome(index, currentMember.getHome());
+         possibleFriend = myArray.checkFriendsByHomeTown(index, currentMember.getHomeTown());
          if ((possibleFriend != null) && (index != location)) {
             // If not already a friend ask if they are to be added
             if (!currentMember.alreadyAFriend(possibleFriend)) {
@@ -179,6 +188,26 @@ public class Login {
             }//if
          }//if
       }//for
+
+      //Check for and add possible friends based on county
+      System.out.println("\nSuggested friends based on home county:");
+      for (int index = 0; index < myArray.getNoOfPersons(); index++) {
+         possibleFriend = myArray.checkFriendsByCounty(index, currentMember.getCounty());
+         if ((possibleFriend != null) && (index != location)) {
+            // If not already a friend ask if they are to be added
+            if (!currentMember.alreadyAFriend(possibleFriend)) {
+               myArray.displayName(index);
+               System.out.print("\tDo you want to add this person as a friend (Y/N)? ");
+               response = keyboard.nextLine().toUpperCase().charAt(0);
+               if (response == 'Y') {
+                  myArray.addFriends(location, possibleFriend);
+                  System.out.println("\t" + myArray.getFullName(index) + " added as a Friend");
+                  noOfFriends++;
+               }//if
+            }//if
+         }//if
+      }//for
+
 
       //Check for and add possible friends based on hobby
       System.out.println("\nSuggested friends based on hobby:");
